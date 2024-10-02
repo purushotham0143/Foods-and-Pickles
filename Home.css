@@ -184,3 +184,149 @@ footer a:hover {
     padding: 10px; /* Optional: Padding around the text */
     border-radius: 5px; /* Optional: Rounded corners */
 }
+
+
+@media (max-width: 768px) {
+    .product-info {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+@media (max-width: 576px) {
+    .btn-buy, .btn-rev {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-info {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-buy, .btn-rev {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .nav-link {
+        font-size: 16px;
+    }
+    .ticker-wrapper {
+        font-size: 18px;
+    }
+    .product-card img {
+        height: 250px;
+    }
+    .product-info {
+        font-size: 12px;
+    }
+    .product-price {
+        font-size: 14px;
+    }
+    .btn-buy, .btn-rev {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar .nav-link {
+        font-size: 14px;
+    }
+    .ticker-wrapper {
+        font-size: 16px;
+    }
+    .product-card img {
+        height: 120px;
+    }
+    .product-info {
+        font-size: 10px;
+    }
+    .product-price {
+        font-size: 12px;
+    }
+    .btn-buy, .btn-rev {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .founder {
+        padding: 10px;
+    }
+    .founder-img {
+        height: 150px;
+    }
+    .about-author h2 {
+        font-size: 20px;
+    }
+    .about-author p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .founder {
+        padding: 5px;
+    }
+    .founder-img {
+        height: 100px;
+    }
+    .about-author h2 {
+        font-size: 18px;
+    }
+    .about-author p {
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    footer .container {
+        padding: 10px;
+    }
+    footer .row {
+        flex-direction: column;
+    }
+    footer .col-md-3, footer .col-md-2, footer .col-md-4, footer .col-md-3 {
+        margin-bottom: 10px;
+    }
+    footer h6 {
+        font-size: 16px;
+    }
+    footer p {
+        font-size: 12px;
+    }
+    footer a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer .container {
+        padding: 5px;
+    }
+    footer .row {
+        flex-direction: column;
+    }
+    footer .col-md-3, footer .col-md-2, footer .col-md-4, footer .col-md-3 {
+        margin-bottom: 5px;
+    }
+    footer h6 {
+        font-size: 14px;
+    }
+    footer p {
+        font-size: 10px;
+    }
+    footer a {
+        font-size: 10px;
+    }
+    footer .col-md-3, footer .col-md-2, footer .col-md-4, footer .col-md-3 {
+        padding: 5px;
+    }
+}

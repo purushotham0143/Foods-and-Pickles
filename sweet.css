@@ -1,6 +1,5 @@
-/* Prevent horizontal scrolling or shifting */
 body {
-    overflow-x: hidden; /* This will prevent any horizontal movement */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
     background-color: wheat;
     height: 100vh;
     margin: 0;
@@ -8,42 +7,42 @@ body {
     box-sizing: border-box;
 }
 
-
-/* Prevent layout shifts by fixing the content size and position */
+/* General Reset for Elements */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    box-sizing: border-box; /* Ensure padding and border are included */
 }
+
+/* Navbar Styles */
 .navbar {
-    background-color:brown; /* Change this color to your desired navbar background color */
+    background-color: brown; /* Change this color to your desired navbar background color */
 }
 .navbar .nav-link {
-    color:white; /* Change text color for better visibility */
+    color: white; /* Change text color for better visibility */
 }
 .navbar .nav-link:hover {
     color: #FFD700; /* Change hover color */
 }
-.container-fluid{
+
+/* Container Styles */
+.container-fluid {
     background-color: brown;
     padding: 15px;
     position: relative;
     overflow: hidden; /* Prevents content overflow that can cause shaking */
 }
-/* Ticker/Slider styling */
+
+/* Ticker/Slider Styles */
 .ticker-wrapper {
     background-color: rgb(186, 96, 189);
-    color:white;
+    color: white;
     font-size: 20px;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 25px;
+    padding: 10px 20px 25px 20px;
     position: relative;
     overflow: hidden;
     will-change: transform;
 }
-
 .ticker {
     display: inline-block;
     white-space: nowrap;
@@ -59,18 +58,21 @@ body {
         transform: translateX(-100%);
     }
 }
+
+/* Items Grid */
 .items {
     display: flex;
-    flex-wrap: wrap; /* Allows the content to wrap to the next row if it exceeds the width */
-    justify-content: space-between; /* Creates spacing between columns */
+    flex-wrap: wrap; /* Allows wrapping when more than three cards are present */
+    justify-content: space-between; /* Ensures even spacing between items */
 }
 
 .col {
-    flex: 1 1 calc(33.33% - 40px); /* Each column takes up 1/3rd of the width, with some margin */
+    flex: 1 1 calc(33.33% - 40px); /* Each column will take up 1/3rd of the row */
     box-sizing: border-box;
-    margin: 10px; /* Adds spacing around each column */
+    margin: 10px;
 }
 
+/* Product Card Styles */
 .product-card {
     display: flex;
     flex-direction: column;
@@ -79,22 +81,21 @@ body {
     overflow: hidden;
     transition: transform 0.3s;
     position: relative;
-    margin: 20px;
-    height: 400px;
-    align-items: center;
+    align-items: center; /* Ensures content is centered horizontally */
     justify-content: space-between;
+    height: 400px; /* Adjust as necessary */
 }
 
 .product-card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover; /* Ensures the image scales properly */
+    width: 100%; /* Ensures the image takes the full width */
+    height: 200px; /* Set a fixed height to prevent layout shifts */
+    object-fit: cover; /* Ensures the image fits within the set area */
     border-radius: 5px;
 }
 
 .product-info {
     padding: 10px;
-    text-align: center;
+    text-align: center; /* Centers the text */
 }
 
 .product-price {
@@ -103,6 +104,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Button Styles */
 .btn-buy, .btn-rev {
     background-color: red;
     color: white;
@@ -110,7 +112,6 @@ body {
     padding: 8px 15px;
     border-radius: 5px;
     margin-bottom: 10px;
-    cursor: pointer;
     display: inline-block;
 }
 
@@ -122,6 +123,7 @@ body {
     background-color: #642188;
 }
 
+/* Footer Styles */
 footer {
     background-color: #386897;
     padding: 30px 0;
@@ -136,17 +138,21 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
-.Logo{
+
+/* Additional Styles for Other Components */
+.Logo {
     height: 600px;
     width: 1250px;
 }
-.shop{
+
+.shop {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    color:black;
+    color: black;
 }
+
 .founder {
     display: flex;
     align-items: center;
@@ -157,13 +163,13 @@ footer a:hover {
 }
 
 .founder-img {
-    width: 500px; /* Adjust the width as needed */
-    height: 500px;
-    margin-right: 20px; /* Adds space between the image and text */
+    width: 500px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px; /* Adds space between image and text */
 }
 
 .about-author {
-    max-width: 70%; /* Adjust the text container width as needed */
+    max-width: 70%; /* Adjust width as needed */
 }
 
 .about-author h2 {
@@ -173,24 +179,26 @@ footer a:hover {
 .about-author p {
     line-height: 1.5;
 }
+
+/* Overlay and Image Link */
 .product-card {
-    position: relative; /* Establish a positioning context for absolute positioning */
-    overflow: hidden; /* Ensure content doesn't overflow the card */
+    position: relative; /* Establish a positioning context */
+    overflow: hidden; /* Prevent overflow */
 }
 
 .image-link {
-    display: block; /* Make the link block-level to fill the entire area */
+    display: block; /* Make the link fill the area */
 }
 
 .overlay-text {
-    position: absolute; /* Position the text over the image */
+    position: absolute; /* Position text over the image */
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust the position */
-    color: white; /* Change text color for visibility */
-    font-size: 18px; /* Adjust font size as needed */
-    text-align: center; /* Center the text */
-    background-color: rgba(0, 0, 0, 0.5); /* Optional: Semi-transparent background for better readability */
-    padding: 10px; /* Optional: Padding around the text */
+    transform: translate(-50%, -50%); /* Adjust position */
+    color: white; /* Change text color */
+    font-size: 18px; /* Adjust font size */
+    text-align: center; /* Center text */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px; /* Optional: Padding around text */
     border-radius: 5px; /* Optional: Rounded corners */
 }
