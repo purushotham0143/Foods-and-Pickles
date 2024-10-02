@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .payment-container {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .left-section {
+            width: 40%;
+            background-color: #2f54eb;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .right-section {
+            width: 60%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .price-summary {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+        }
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .payment-option {
+            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 8px;
+            background-color: #f0f0f5;
+        }
+        .payment-option img {
+            height: 20px;
+        }
+        .upi-qr-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .scan-text {
+            margin-right: 10px;
+        }
+        .phone-input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .hidden {
+            display: none;
+        }
+        .timer {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #ff4d4f;  /* Change the color to make it noticeable */
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="price-summary" id="totalAmount">
+                ₹0
+            </div>
+            <div>Using as <span id="customerPhone">+91 80962 85536</span></div>
+            <input type="text" id="phoneNumber" class="phone-input" placeholder="Enter your phone number" />
+        </div>
+        <!-- Right Section -->
+        <div class="right-section">
+            <!-- UPI QR Section -->
+            <div class="upi-qr-section">
+                <div class="scan-text">Scan with any UPI App</div>
+                <div class="qr-code" id="qrCode">
+                    <img src="./Images/qr-code.jpeg" alt="QR Code">
+                </div>
+            </div>
+            <div class="timer" id="timer">Time remaining: 3:00</div> <!-- Timer display -->
+            <!-- Payment Options -->
+            <div class="payment-options">
+                <div class="payment-option">
+                    <span>UPI</span>
+                    <img src="upi-logo.png" alt="UPI">
+                </div>
+                <div class="payment-option">
+                    <span>Cards</span>
+                    <img src="card-logo.png" alt="Cards">
+                </div>
+                <div class="payment-option">
+                    <span>Netbanking</span>
+                    <img src="netbanking-logo.png" alt="Netbanking">
+                </div>
+                <div class="payment-option">
+                    <span>Wallet</span>
+                    <img src="wallet-logo.png" alt="Wallet">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve the total checkout price from localStorage or set it as 0 if not found
+        const totalCheckoutAmount = localStorage.getItem('totalAmount') || 0;
+        document.getElementById("totalAmount").innerText = `₹${totalCheckoutAmount}`;
+
+        // Dynamic phone number update
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const customerPhoneDisplay = document.getElementById('customerPhone');
+
+        phoneNumberInput.addEventListener('input', function() {
+            const phoneNumber = phoneNumberInput.value;
+            customerPhoneDisplay.textContent = phoneNumber ? `+91 ${phoneNumber}` : '+91 80962 85536';
+        });
+
+        // QR code timer functionality
+        let timeRemaining = 180; // 3 minutes in seconds
+        const timerElement = document.getElementById('timer');
+        const qrCode = document.getElementById('qrCode');
+
+        const countdown = setInterval(function() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerElement.textContent = `Time remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdown);
+                qrCode.classList.add('hidden');
+                timerElement.textContent = 'QR code hidden!';
+            }
+
+            timeRemaining--;
+        }, 1000);
+
+    </script>
+</body>
+</html>

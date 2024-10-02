@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Mutton Pickle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="product-card">
+        <div class="product-image">
+            <img src="./Images/Mutton.jpeg" alt="Mutton Pickle">
+        </div>
+        <div class="product-details">
+            <h1 class="product-title">Gongura Mutton(Boneless) Pickle</h1>
+            <p class="product-price-range">Price Range: ₹750.00 – ₹2800.00</p>
+            <p class="product-description">
+                Delicious and spicy Mutton Pickle made with tender mutton pieces...
+            </p>
+            <div class="quantity-section">
+                <label for="quantity">Quantity:</label>
+                <div class="quantity-options">
+                    <button onclick="selectQuantity(250)">250 Grms</button>
+                    <button onclick="selectQuantity(500)">500 Grms</button>
+                    <button onclick="selectQuantity(1000)">1 kg</button>
+                    <button onclick="clearPrice()">x Clear</button>
+                </div>
+            </div>
+            <!-- Separate tag for displaying the selected price -->
+            <p class="selected-price" id="selected-price"></p>
+            <button class="add-to-cart-btn">ADD TO CART</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedWeight = 0;
+
+    function selectQuantity(amount) {
+        selectedWeight = amount;
+        let selectedPriceElement = document.getElementById('selected-price');
+        let price;
+
+        if (amount === 250) {
+            price = "₹750.00";
+        } else if (amount === 500) {
+            price = "₹1400.00";
+        } else if (amount === 1000) {
+            price = "₹2,800.00";
+        }
+
+        selectedPriceElement.textContent = "Selected Price: " + price + " (" + amount + " Grms)";
+    }
+
+    function clearPrice() {
+        let selectedPriceElement = document.getElementById('selected-price');
+        selectedPriceElement.textContent = "";
+        selectedWeight = 0;
+    }
+
+    document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+        if (selectedWeight === 0) {
+            alert("Please select a quantity before adding to cart.");
+            return;
+        }
+
+        // Assign price based on selected weight
+        let price;
+        if (selectedWeight === 250) {
+            price = 750.00;
+        } else if (selectedWeight === 500) {
+            price = 1400.00;
+        } else if (selectedWeight === 1000) {
+            price = 2800.00;
+        }
+
+        // Save product information
+        let product = {
+            name: "Mutton Pickle",
+            price: price,
+            weight: selectedWeight,
+            image: "./Images/Mutton.jpeg",  // Correct image for Mutton Pickle
+            quantity: 1
+        };
+
+        // Save to localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Redirect to the cart.html page
+        window.location.href = 'cart.html';
+    });
+</script>
+</body>
+</html>

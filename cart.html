@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+<div class="container">
+    <h1>Your Shopping Cart</h1>
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Weight (Grams)</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="cart-items">
+        <!-- Cart items will be dynamically populated here -->
+        </tbody>
+    </table>
+    <p class="cart-total">Total: ₹<span id="cart-total">0.00</span></p>
+    
+    <!-- Proceed to Checkout Button -->
+    <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+</div>
+
+<script>
+    function loadCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartTableBody = document.getElementById('cart-items');
+        let cartTotalElement = document.getElementById('cart-total');
+        let total = 0;
+
+        cartTableBody.innerHTML = '';  // Clear existing cart items
+
+        cart.forEach((item, index) => {
+            let row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td><img src="${item.image}" alt="Product Image" class="product-img"></td>
+                <td>${item.name}</td>
+                <td>${item.weight} Grms</td>
+                <td>
+                    <button onclick="decreaseQuantity(${index})">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="increaseQuantity(${index})">+</button>
+                </td>
+                <td>₹${(item.price * item.quantity).toFixed(2)}</td>
+                <td><button onclick="removeItem(${index})" class="remove-btn">Remove</button></td>
+            `;
+
+            cartTableBody.appendChild(row);
+            total += item.price * item.quantity;
+        });
+
+        cartTotalElement.textContent = total.toFixed(2);
+    }
+
+    function increaseQuantity(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart[index].quantity++;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+    }
+
+    function decreaseQuantity(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart[index].quantity > 1) {
+            cart[index].quantity--;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        loadCart();
+    }
+
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+    }
+
+    // Proceed to Checkout Functionality
+    document.getElementById('checkout-btn').addEventListener('click', function() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert("Your cart is empty. Please add items to your cart before proceeding to checkout.");
+            return;
+        }
+
+        // Redirect to checkout page (you can change the URL to your checkout page)
+        window.location.href = 'checkout.html';  // Change to your checkout page URL
+    });
+
+    // Load the cart items on page load
+    window.onload = loadCart;
+</script>
+</body>
+</html>

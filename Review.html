@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .review-card {
+            margin-bottom: 20px;
+        }
+
+        .review-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Krishika Home Foods and Pickles</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./About.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contact.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Reviews Form -->
+    <div class="container mt-5">
+        <h2 class="text-center">Customer Reviews</h2>
+        <form id="reviewForm" class="mb-4" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="customerName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="customerName" required>
+            </div>
+            <div class="mb-3">
+                <label for="customerReview" class="form-label">Review</label>
+                <textarea class="form-control" id="customerReview" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="customerRating" class="form-label">Rating</label>
+                <select class="form-select" id="customerRating" required>
+                    <option value="" disabled selected>Select a rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="reviewImage" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="reviewImage" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+
+        <div id="reviews" class="row"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+            &copy; 2024 Company Name. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('customerName').value;
+            const review = document.getElementById('customerReview').value;
+            const rating = document.getElementById('customerRating').value;
+            const imageInput = document.getElementById('reviewImage');
+            const formData = new FormData(); // Use FormData to handle file upload
+
+            // Append data to FormData
+            formData.append('name', name);
+            formData.append('review', review);
+            formData.append('rating', rating);
+            if (imageInput.files.length > 0) {
+                formData.append('reviewImage', imageInput.files[0]); // Append the image file
+            }
+
+            // Send review to server
+            submitReviewToServer(formData);
+
+            // Reset the form
+            document.getElementById('reviewForm').reset();
+        });
+
+        // Function to send review to server
+        function submitReviewToServer(formData) {
+            fetch('/submit-review', {
+                method: 'POST',
+                body: formData // Send FormData directly
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Review submitted successfully!') {
+                    // You can refresh the reviews or show a success message
+                    loadReviews(); // Load reviews after submission
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Function to load reviews on page load (from server)
+        function loadReviews() {
+            fetch('/reviews.json')
+                .then(response => response.json())
+                .then(reviews => {
+                    document.getElementById('reviews').innerHTML = ''; // Clear previous reviews
+                    reviews.forEach(review => {
+                        addReviewCard(review.name, review.review, review.rating, review.imageURL);
+                    });
+                })
+                .catch(error => console.error('Error loading reviews:', error));
+        }
+
+        // Load reviews on page load
+        window.onload = loadReviews;
+
+        function addReviewCard(name, review, rating, imageURL) {
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'col-md-4 review-card';
+            reviewCard.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${name}</h5>
+                        <p class="card-text">"${review}"</p>
+                        <p class="text-muted">Rating: ${'⭐'.repeat(rating)}</p>
+                        ${imageURL ? `<img src="${imageURL}" class="review-image" alt="Review Image">` : ''}
+                    </div>
+                </div>
+            `;
+            document.getElementById('reviews').appendChild(reviewCard);
+        }
+    </script>
+</body>
+
+</html>

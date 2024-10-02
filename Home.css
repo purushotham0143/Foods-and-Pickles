@@ -1,0 +1,186 @@
+/* Prevent horizontal scrolling or shifting */
+body {
+    overflow-x: hidden; /* This will prevent any horizontal movement */
+    background-color: wheat;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Prevent layout shifts by fixing the content size and position */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+.navbar {
+    background-color:brown; /* Change this color to your desired navbar background color */
+}
+.navbar .nav-link {
+    color:white; /* Change text color for better visibility */
+}
+.navbar .nav-link:hover {
+    color: #FFD700; /* Change hover color */
+}
+.container-fluid{
+    background-color: brown;
+    padding: 15px;
+    position: relative;
+    overflow: hidden; /* Prevents content overflow that can cause shaking */
+}
+/* Ticker/Slider styling */
+.ticker-wrapper {
+    background-color: rgb(186, 96, 189);
+    color:white;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-move 15s linear infinite;
+    will-change: transform;
+}
+
+@keyframes ticker-move {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    position: relative;
+    will-change: transform; /* Optimizes the hover animation to prevent reflow */
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    
+    width: 100%;
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* This makes the image cover the entire area */
+}
+
+.product-info {
+    padding: 10px;
+    text-align: left;
+}
+
+.product-price {
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.btn-buy {
+    background-color:red;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.btn-buy:hover {
+    background-color: #4a2188;
+}
+.btn-rev{
+    background-color:#28a745;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;  
+}
+.btn-rev:hover {
+    background-color: #642188;
+}
+footer {
+    background-color: #386897;
+    padding: 30px 0;
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+.Logo{
+    height: 600px;
+    width: 1250px;
+}
+.shop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    color:black;
+}
+.founder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1px;
+    background-color: brown;
+    color: white;
+}
+
+.founder-img {
+    width: 500px; /* Adjust the width as needed */
+    height: 500px;
+    margin-right: 20px; /* Adds space between the image and text */
+}
+
+.about-author {
+    max-width: 70%; /* Adjust the text container width as needed */
+}
+
+.about-author h2 {
+    margin: 0 0 10px 0;
+}
+
+.about-author p {
+    line-height: 1.5;
+}
+.product-card {
+    position: relative; /* Establish a positioning context for absolute positioning */
+    overflow: hidden; /* Ensure content doesn't overflow the card */
+}
+
+.image-link {
+    display: block; /* Make the link block-level to fill the entire area */
+}
+
+.overlay-text {
+    position: absolute; /* Position the text over the image */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the position */
+    color: white; /* Change text color for visibility */
+    font-size: 18px; /* Adjust font size as needed */
+    text-align: center; /* Center the text */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Semi-transparent background for better readability */
+    padding: 10px; /* Optional: Padding around the text */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
