@@ -32,7 +32,7 @@ const upload = multer({
             cb('Error: Images Only!');
         }
     },
-    limits: { fileSize: 1000000 } // Increase the file size limit to 1MB
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
 });
 
 
@@ -122,6 +122,8 @@ app.post('/submit-contact', (req, res) => {
 // Endpoint to submit an order
 app.post('/api/orders', (req, res) => {
     const newOrder = req.body; // Get the order data from the request
+    
+    newOrder.date =  new Date().toLocaleTimeString();
 
     // Read existing orders from orders.json
     fs.readFile(path.join(__dirname, 'orders.json'), 'utf8', (err, data) => {
@@ -155,6 +157,29 @@ app.get('/reviews.json', (req, res) => {
         res.json(JSON.parse(data));
     });
 });
+
+
+
+            
+app.post('/getTotalAmount', (req, res) => {
+    let data = JSON.parse(fs.readFileSync("amount.json", 'utf-8'));
+    let amount = req.body.amount;
+    let fileName = req.body.fileName
+    let username = req.body.username
+
+    if (amount && fileName && username) {
+        data.push({
+            amount: amount,
+            fileName: fileName,
+            username : username,
+            date: new Date().toLocaleString() // Date and time
+        });
+        fs.writeFileSync("amount.json", JSON.stringify(data,null,2));
+    }
+
+    res.status(200).send({ success: true });
+});
+
 
 // Start the server
 app.listen(PORT, () => {
