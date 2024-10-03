@@ -94,5 +94,29 @@
     ],
     "orderTotal": "1000.00",
     "date": "7:30:35 pm"
+  },
+  {
+    "firstName": "Ragala",
+    "lastName": "purushotham",
+    "companyName": "xyz",
+    "country": "India",
+    "streetAddress": "efewfw",
+    "apartment": "dfqwf",
+    "city": "afqw",
+    "state": "qwfqwf",
+    "zip": "524344",
+    "phone": "9014037447",
+    "email": "rpurushotham0143@gmail.com",
+    "orderItems": [
+      {
+        "name": "Mushroom Pickle",
+        "price": 200,
+        "weight": 250,
+        "image": "./Veg-images/Musroom Pickles.jpg",
+        "quantity": 2
+      }
+    ],
+    "orderTotal": "400.00",
+    "date": "11:35:03 pm"
   }
 ]

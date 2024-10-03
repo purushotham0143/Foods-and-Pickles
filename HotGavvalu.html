@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Prawn Pickle</title>
+    <title>Buy Sweet Gaavalu</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="container">
     <div class="product-card">
         <div class="product-image">
-            <img src="./Items/gonguraprawns.jpeg" alt="Prawn Pickle">
+            <img src="./Items/Hotgavaa.jpeg" alt="Sweet Gaavalu">
         </div>
         <div class="product-details">
-            <h1 class="product-title">Gongura Prawn Pickle</h1>
-            <p class="product-price-range">Price Range: ₹350.00 – ₹1,800.00</p>
+            <h1 class="product-title">Gavvalu</h1>
+            <p class="product-price-range">Price Range: ₹150.00 – ₹600.00</p>
             <p class="product-description">
-                Enjoy the delicious and savory taste of our homemade Prawn Pickle, made with fresh prawns and traditional spices.
+                Savor the sweet and crunchy flavor of our traditional Sweet Gaavalu, homemade with love...
             </p>
             <div class="quantity-section">
                 <label for="quantity">Quantity:</label>
@@ -35,7 +35,7 @@
 </div>
 
 <script>
-    let selectedWeight = 0; // Global variable to store selected weight
+    let selectedWeight = 0;
 
     function selectQuantity(amount) {
         selectedWeight = amount;
@@ -43,11 +43,11 @@
         let price;
 
         if (amount === 250) {
-            price = "₹450.00";
+            price = "₹150.00";
         } else if (amount === 500) {
-            price = "₹900.00";
+            price = "₹300.00";
         } else if (amount === 1000) {
-            price = "₹1,800.00";
+            price = "₹600.00";
         }
 
         selectedPriceElement.textContent = "Selected Price: " + price + " (" + amount + " Grms)";
@@ -56,7 +56,7 @@
     function clearPrice(){
         let selectedPriceElement = document.getElementById('selected-price');
         selectedPriceElement.textContent = "";
-        selectedWeight = 0; // Clear weight if selection is cleared
+        selectedWeight = 0;
     }
 
     document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
@@ -68,19 +68,19 @@
         // Assign price based on selected weight
         let price;
         if (selectedWeight === 250) {
-            price = 450.00;
+            price = 150.00;
         } else if (selectedWeight === 500) {
-            price = 900.00;
+            price = 300.00;
         } else if (selectedWeight === 1000) {
-            price = 1800.00;
+            price = 600.00;
         }
 
         // Save product information with image
         let product = {
-            name: "Prawn Pickle",
+            name: "Sweet Gaavalu",
             price: price,
             weight: selectedWeight,
-            image: "./Items/gonguraprawns.jpeg",
+            image: "./Items/Hotgavaa.jpeg",  // Correct image for Sweet Gaavalu
             quantity: 1
         };
 
