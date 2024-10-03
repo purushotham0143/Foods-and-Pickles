@@ -219,6 +219,7 @@ body {
                 email: document.getElementById('email').value.trim(),
                 orderItems: JSON.parse(localStorage.getItem('cart')) || [],
                 orderTotal: document.getElementById('order-total').textContent,
+                screenshot : false
             };
     
             // Validation check for required fields
@@ -248,29 +249,8 @@ body {
             }
     
             // Proceed with placing the order if validation passes
-            fetch('/api/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(billingDetails),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                alert(data); // Show success message
-                // Clear the cart
-                localStorage.removeItem('cart');
-                // Optionally, redirect or load a success page
-                // window.location.href = "success.html";  // Uncomment to redirect
-            })
-            .catch(error => {
-                alert('Error placing order: ' + error.message);
-            });
+            
+            localStorage.setItem("bill",JSON.stringify(billingDetails))
             window.location.href = "payment.html";
         });
     });

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .status-container {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #999;
+            position: relative;
+        }
+        
+        .status-item p {
+            margin-top: 5px;
+            font-size: 16px;
+        }
+        
+        .status-icon {
+            font-size: 24px;
+            color: #999;
+            opacity: 0.5; /* Initially hidden */
+        }
+        
+        .status-item.active {
+            color: #2f54eb; /* Active color */
+        }
+        
+        .status-item.active .status-icon {
+            opacity: 1; /* Show checkmark */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="status-container">
+        <h1>Order Status</h1>
+        <div class="status-row">
+            <div class="status-item confirmed">
+                <span class="status-icon">&#10003;</span>
+                <p>Order Confirmed</p>
+            </div>
+            <div class="status-item shipped">
+                <span class="status-icon">&#10003;</span>
+                <p>Order Shipped</p>
+            </div>
+            <div class="status-item delivered">
+                <span class="status-icon">&#10003;</span>
+                <p>Order Delivered</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data: set order status to simulate progression
+        const orderStatus = {
+            confirmed: true,
+            shipped: false,
+            delivered: false
+        };
+
+        // Update status items based on orderStatus
+        const statusItems = document.querySelectorAll('.status-item');
+        
+        if (orderStatus.confirmed) {
+            statusItems[0].classList.add('active');
+        }
+        if (orderStatus.shipped) {
+            statusItems[1].classList.add('active');
+        }
+        if (orderStatus.delivered) {
+            statusItems[2].classList.add('active');
+        }
+    </script>
+</body>
+</html>
