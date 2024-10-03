@@ -66,11 +66,22 @@
      <div class="items">
         <div class="col">
             <div class="product-card">
-                <img src="./Images/chakkalu.jpeg" alt="Chakkalu">
+                <img src="./Items/chakkalu.jpeg" alt="Chakkalu">
                 <div class="product-info">
                     <p>Name: Chakkalu</p>
                     <div class="product-price">Price Range: ₹170 - ₹330</div>
                     <a href="./chakkalu.html" class="btn-buy" target="_blank">Buy Now</a>
+                    <a href="./Review.html" class="btn-rev" target="_blank">Review</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="product-card">
+                <img src="./Items/Hotgavaa.jpeg" alt="Chakkalu">
+                <div class="product-info">
+                    <p>Name:Gavvalu</p>
+                    <div class="product-price">Price Range: ₹170 - ₹330</div>
+                    <a href="" class="btn-buy" target="_blank">Buy Now</a>
                     <a href="./Review.html" class="btn-rev" target="_blank">Review</a>
                 </div>
             </div>
@@ -128,13 +139,13 @@
                     <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
                     <p><i class="fas fa-phone mr-3"></i> +91 9100332016</p>
                     <p><i class="fas fa-phone mr-3">Customer support:</i>7:00Am To 10Pm</p>
-                    <p><i class="fas fa-envelope mr-3"></i> info@krishikafoods.com</p>
+                    <p><i class="fas fa-envelope mr-3"></i>krishikapickles@gmail.com</p>
                     <p><i class="fas fa-envelope mr-3"></i>Physical address: Nellore, 524344, AP, India.</p>
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 font-weight-bold">Follow Us</h6>
                     <a href="https://www.facebook.com/share/3LyxDguBBC3unJNj/?mibextid=qi2Omg" class="text-white me-4"><img src="./facebook.png" alt="Facebook" width="20px"></a>
-                    <a href="https://www.instagram.com/krishikahomefoods?igsh=MWlxZWxzZHlhbmd6dQ==" class="text-white me-4"><img src="./Images/Instagram.jpg" alt="Instagram" width="20px"></a>
+                    <a href="https://www.instagram.com/krishikahomefoods?igsh=MWlxZWxzZHlhbmd6dQ==" class="text-white me-4"><img src="./Items/Instagram.jpg" alt="Instagram" width="20px"></a>
                     <!-- <a href="#" class="text-white me-4"><img src="./Images/Twitter.png" alt="Twitter" width="20px"></a> -->
 
                 </div>
@@ -148,26 +159,26 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
-                // Get the search input field and all product cards
-                const searchInput = document.getElementById("productSearch");
-                const productCards = document.querySelectorAll(".product-card");
-        
-                // Add an event listener to the search input
-                searchInput.addEventListener("input", function() {
-                    const searchValue = searchInput.value.toLowerCase(); // Get search input and convert to lowercase
-        
-                    productCards.forEach((card) => {
-                        // Get the product name inside each card
-                        const productName = card.querySelector(".product-info p").textContent.toLowerCase();
-                        
-                        // Show the card if it matches the search input, otherwise hide it
-                        if (productName.includes(searchValue)) {
-                            card.style.display = "block";
-                        } else {
-                            card.style.display = "none";
-                        }
-                    });
-                });
-    </script>
+               // Get the search input field and all product cards
+const searchInput = document.getElementById("productSearch");
+const productCards = document.querySelectorAll(".product-card");
+
+// Add an event listener to the search input
+searchInput.addEventListener("input", function () {
+    const searchValue = searchInput.value.toLowerCase().trim(); // Get search input, convert to lowercase, and remove extra spaces
+
+    productCards.forEach((card) => {
+        // Safely get the product name inside each card
+        const productNameElement = card.querySelector(".product-info p");
+        const productName = productNameElement ? productNameElement.textContent.toLowerCase() : "";
+
+        // Show the card if it matches the search input, otherwise hide it
+        if (productName.includes(searchValue)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});    </script>
 </body>
 </html>
