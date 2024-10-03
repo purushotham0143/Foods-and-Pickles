@@ -12,14 +12,37 @@ const PORT = 3000; // Change this to any port you prefer
 // Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // Directory to store uploaded images
+        cb(null, path.join(__dirname, 'uploads')); // Update the path to include __dirname
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname); // Rename file with timestamp
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+    dest : path.join(__dirname,'uploads'),
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpeg|jpg|png|gif/;
+        const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+        const mimeType = fileTypes.test(file.mimetype);
+        if (extName && mimeType) {
+            cb(null, true);
+        } else {
+            cb('Error: Images Only!');
+        }
+    },
+    limits: { fileSize: 1000000 } // Increase the file size limit to 1MB
+});
+
+
+app.post('/upload-screenshot', upload.single('paymentScreenshot'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ success: false, message: 'No file uploaded' });
+    }
+    res.json({ success: true, message: 'File uploaded successfully', filePath: `/uploads/${req.file.filename}` });
+});
+
 
 // Middleware
 app.use(cors());
@@ -64,6 +87,8 @@ app.post('/submit-review', upload.single('reviewImage'), (req, res) => {
         });
     });
 });
+
+
 
 
 

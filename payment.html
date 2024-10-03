@@ -16,15 +16,15 @@
         }
         .payment-container {
             display: flex;
+            flex-direction: column;
             width: 800px;
-            height: 400px;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            padding: 20px;
         }
         .left-section {
-            width: 40%;
             background-color: #2f54eb;
             color: white;
             padding: 20px;
@@ -32,62 +32,54 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin-bottom: 20px;
+            text-align: center;
         }
         .right-section {
-            width: 60%;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
         .price-summary {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 20px;
         }
-        .qr-code img {
-            width: 150px;
-            height: 150px;
+        .upi-info {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
         .payment-options {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            margin-bottom: 20px;
         }
-        .payment-option {
+        .upload-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .upload-label {
             margin-bottom: 10px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            font-weight: bold;
+        }
+        .upload-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #2f54eb;
+            color: white;
             border-radius: 8px;
-            background-color: #f0f0f5;
+            cursor: pointer;
         }
-        .payment-option img {
-            height: 20px;
+        .upload-btn:hover {
+            background-color: #1c39e0;
         }
-        .upi-qr-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .scan-text {
-            margin-right: 10px;
-        }
-        .phone-input {
-            padding: 10px;
-            width: 80%;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-        .hidden {
+        .image-preview {
+            margin-top: 10px;
+            width: 150px;
+            height: auto;
             display: none;
         }
-        .timer {
-            font-size: 18px;
-            margin-top: 10px;
-            color: #ff4d4f;  /* Change the color to make it noticeable */
+        .message {
+            color: green;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -95,40 +87,29 @@
     <div class="payment-container">
         <!-- Left Section -->
         <div class="left-section">
-            <div class="price-summary" id="totalAmount">
-                ₹0
-            </div>
-            <div>Using as <span id="customerPhone">+91 80962 85536</span></div>
-            <input type="text" id="phoneNumber" class="phone-input" placeholder="Enter your phone number" />
+            <div class="price-summary" id="totalAmount">₹0</div>
+            <div>Pay to this UPI number:</div>
+            <div class="upi-info"><strong>9100332016</strong></div>
         </div>
+
         <!-- Right Section -->
         <div class="right-section">
-            <!-- UPI QR Section -->
-            <div class="upi-qr-section">
-                <div class="scan-text">Scan with any UPI App</div>
-                <div class="qr-code" id="qrCode">
-                    <img src="./Images/qr-code.jpeg" alt="QR Code">
-                </div>
-            </div>
-            <div class="timer" id="timer">Time remaining: 3:00</div> <!-- Timer display -->
             <!-- Payment Options -->
             <div class="payment-options">
-                <div class="payment-option">
-                    <span>UPI</span>
-                    <img src="upi-logo.png" alt="UPI">
+                <p>Please make the payment to the UPI number above and upload the payment screenshot.</p>
+            </div>
+
+            <!-- Image Upload Section -->
+            <div class="upload-section">
+                <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/upload-screenshot">
+                <label class="upload-label" for="paymentScreenshot">Upload Payment Screenshot:</label>
+                <input type="file" id="paymentScreenshot" accept="image/*" />
+                <button class="upload-btn" id="uploadBtn" type="submit">Upload</button>
+                </form>
+                <div>
+                    <img id="previewImage" class="image-preview" src="#" alt="Image Preview" />
                 </div>
-                <div class="payment-option">
-                    <span>Cards</span>
-                    <img src="card-logo.png" alt="Cards">
-                </div>
-                <div class="payment-option">
-                    <span>Netbanking</span>
-                    <img src="netbanking-logo.png" alt="Netbanking">
-                </div>
-                <div class="payment-option">
-                    <span>Wallet</span>
-                    <img src="wallet-logo.png" alt="Wallet">
-                </div>
+                <div class="message" id="successMessage"></div>
             </div>
         </div>
     </div>
@@ -138,34 +119,56 @@
         const totalCheckoutAmount = localStorage.getItem('totalAmount') || 0;
         document.getElementById("totalAmount").innerText = `₹${totalCheckoutAmount}`;
 
-        // Dynamic phone number update
-        const phoneNumberInput = document.getElementById('phoneNumber');
-        const customerPhoneDisplay = document.getElementById('customerPhone');
+        // Image upload and preview functionality
+        const paymentScreenshotInput = document.getElementById('paymentScreenshot');
+        const previewImage = document.getElementById('previewImage');
+        const successMessage = document.getElementById('successMessage');
 
-        phoneNumberInput.addEventListener('input', function() {
-            const phoneNumber = phoneNumberInput.value;
-            customerPhoneDisplay.textContent = phoneNumber ? `+91 ${phoneNumber}` : '+91 80962 85536';
+        paymentScreenshotInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
         });
 
-        // QR code timer functionality
-        let timeRemaining = 180; // 3 minutes in seconds
-        const timerElement = document.getElementById('timer');
-        const qrCode = document.getElementById('qrCode');
-
-        const countdown = setInterval(function() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            timerElement.textContent = `Time remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-            if (timeRemaining <= 0) {
-                clearInterval(countdown);
-                qrCode.classList.add('hidden');
-                timerElement.textContent = 'QR code hidden!';
+        // Handle image upload button click
+        document.getElementById('uploadBtn').addEventListener('click', function() {
+            const paymentScreenshotInput = document.getElementById('paymentScreenshot');
+            const file = paymentScreenshotInput.files[0];
+            
+            if (file) {
+                const formData = new FormData();
+                formData.append('paymentScreenshot', file);
+    
+                fetch('http://localhost:3000/upload-screenshot', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('successMessage').textContent = 'Payment screenshot uploaded successfully!';
+                        document.getElementById('successMessage').style.color = 'green';
+                    } else {
+                        document.getElementById('successMessage').textContent = 'Error uploading screenshot.';
+                        document.getElementById('successMessage').style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('successMessage').textContent = 'An error occurred during upload.';
+                    document.getElementById('successMessage').style.color = 'red';
+                });
+            } else {
+                document.getElementById('successMessage').textContent = 'Please upload an image before clicking Upload.';
+                document.getElementById('successMessage').style.color = 'red';
             }
-
-            timeRemaining--;
-        }, 1000);
-
+        });
     </script>
 </body>
 </html>
