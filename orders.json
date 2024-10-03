@@ -10,18 +10,19 @@
     "state": "Himachal pradesh",
     "zip": "174103",
     "phone": "8096285536",
-    "email": "rohan1315.be22@chitkarauniversity.edu.in",
+    "email": "rohan1313.be22@chitkarauniversity.edu.in",
     "orderItems": [
       {
-        "name": "Chicken Pickle (With Bone)",
-        "price": 500,
+        "name": "Mushroom Pickle",
+        "price": 400,
         "weight": 500,
-        "image": "./Images/Checken.jpeg",
+        "image": "./Veg-images/Musroom Pickles.jpg",
         "quantity": 1
       }
     ],
-    "orderTotal": "500.00",
-    "date": "7:04:18 pm"
+    "orderTotal": "400.00",
+    "screenshot": false,
+    "date": "11:10:55 pm"
   },
   {
     "firstName": "Maram",
@@ -29,12 +30,37 @@
     "companyName": "Chitkara university",
     "country": "India",
     "streetAddress": "Hostel",
-    "apartment": "fds",
+    "apartment": "Flat No -> 8-233",
     "city": "Baddi,solan",
     "state": "Himachal pradesh",
     "zip": "174103",
     "phone": "8096285536",
     "email": "rohan1313.be22@chitkarauniversity.edu.in",
+    "orderItems": [
+      {
+        "name": "Mushroom Pickle",
+        "price": 400,
+        "weight": 500,
+        "image": "./Veg-images/Musroom Pickles.jpg",
+        "quantity": 1
+      }
+    ],
+    "orderTotal": "400.00",
+    "screenshot": false,
+    "date": "11:28:45 pm"
+  },
+  {
+    "firstName": "Maram",
+    "lastName": "Rohan raj",
+    "companyName": "Chitkara University",
+    "country": "India",
+    "streetAddress": "mentipeta colony",
+    "apartment": "8-233 opp sai apartments",
+    "city": "Rajam",
+    "state": "Andhra Pradesh",
+    "zip": "532127",
+    "phone": "8096285536",
+    "email": "rohanrajmaram2@gmail.com",
     "orderItems": [
       {
         "name": "Chicken Pickle (With Bone)",
@@ -42,57 +68,17 @@
         "weight": 500,
         "image": "./Images/Checken.jpeg",
         "quantity": 1
-      }
-    ],
-    "orderTotal": "500.00",
-    "date": "7:13:51 pm"
-  },
-  {
-    "firstName": "Maram",
-    "lastName": "raj",
-    "companyName": "Chitkara university",
-    "country": "India",
-    "streetAddress": "Hostel",
-    "apartment": "fds",
-    "city": "Baddi,solan",
-    "state": "Himachal pradesh",
-    "zip": "174103",
-    "phone": "8096285536",
-    "email": "rohan1313.be22@chitkarauniversity.edu.in",
-    "orderItems": [
+      },
       {
-        "name": "Chicken Pickle (With Bone)",
-        "price": 500,
+        "name": "Chakkalu",
+        "price": 240,
         "weight": 500,
-        "image": "./Images/Checken.jpeg",
+        "image": "./Images/chakkalu.jpeg",
         "quantity": 1
       }
     ],
-    "orderTotal": "500.00",
-    "date": "7:28:06 pm"
-  },
-  {
-    "firstName": "Maram",
-    "lastName": "raj",
-    "companyName": "Chitkara university",
-    "country": "India",
-    "streetAddress": "Hostel",
-    "apartment": "bh",
-    "city": "Baddi,solan",
-    "state": "Himachal pradesh",
-    "zip": "174103",
-    "phone": "8096285536",
-    "email": "rohan1313.be22@chitkarauniversity.edu.in",
-    "orderItems": [
-      {
-        "name": "Chicken Pickle (With Bone)",
-        "price": 1000,
-        "weight": 1000,
-        "image": "./Images/Checken.jpeg",
-        "quantity": 1
-      }
-    ],
-    "orderTotal": "1000.00",
-    "date": "7:30:35 pm"
+    "orderTotal": "740.00",
+    "screenshot": false,
+    "date": "11:35:28 pm"
   }
 ]

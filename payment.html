@@ -15,7 +15,7 @@
             margin: 0;
         }
         .payment-container {
-            margin-top: 100px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             width: 800px;
@@ -186,6 +186,12 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        let billingDetails = JSON.parse(localStorage.getItem("bill")) || [];
+                        fetch(`/api/orders`,{
+                            method : "POST",
+                            headers : {"Content-Type" : "application/json"},
+                            body : JSON.stringify(billingDetails)
+                        })
                         document.getElementById('successMessage').textContent = 'Payment screenshot uploaded successfully!';
                         document.getElementById('successMessage').style.color = 'green';
 
@@ -200,6 +206,7 @@
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(reqobj)
                         });
+                        window.location.href = "status.html"
                     } else {
                         document.getElementById('successMessage').textContent = 'Error uploading screenshot.';
                         document.getElementById('successMessage').style.color = 'red';
