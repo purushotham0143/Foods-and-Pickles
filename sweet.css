@@ -1,0 +1,204 @@
+body {
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    background-color: wheat;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Reset for Elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensure padding and border are included */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: brown; /* Change this color to your desired navbar background color */
+}
+.navbar .nav-link {
+    color: white; /* Change text color for better visibility */
+}
+.navbar .nav-link:hover {
+    color: #FFD700; /* Change hover color */
+}
+
+/* Container Styles */
+.container-fluid {
+    background-color: brown;
+    padding: 15px;
+    position: relative;
+    overflow: hidden; /* Prevents content overflow that can cause shaking */
+}
+
+/* Ticker/Slider Styles */
+.ticker-wrapper {
+    background-color: rgb(186, 96, 189);
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px 25px 20px;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-move 15s linear infinite;
+    will-change: transform;
+}
+
+@keyframes ticker-move {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Items Grid */
+.items {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping when more than three cards are present */
+    justify-content: space-between; /* Ensures even spacing between items */
+}
+
+.col {
+    flex: 1 1 calc(33.33% - 40px); /* Each column will take up 1/3rd of the row */
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+/* Product Card Styles */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    position: relative;
+    align-items: center; /* Ensures content is centered horizontally */
+    justify-content: space-between;
+    height: 400px; /* Adjust as necessary */
+}
+
+.product-card img {
+    width: 100%; /* Ensures the image takes the full width */
+    height: 200px; /* Set a fixed height to prevent layout shifts */
+    object-fit: cover; /* Ensures the image fits within the set area */
+    border-radius: 5px;
+}
+
+.product-info {
+    padding: 10px;
+    text-align: center; /* Centers the text */
+}
+
+.product-price {
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+/* Button Styles */
+.btn-buy, .btn-rev {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.btn-rev {
+    background-color: #28a745;
+}
+
+.btn-buy:hover, .btn-rev:hover {
+    background-color: #642188;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #386897;
+    padding: 30px 0;
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Additional Styles for Other Components */
+.Logo {
+    height: 600px;
+    width: 1250px;
+}
+
+.shop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    color: black;
+}
+
+.founder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1px;
+    background-color: brown;
+    color: white;
+}
+
+.founder-img {
+    width: 500px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px; /* Adds space between image and text */
+}
+
+.about-author {
+    max-width: 70%; /* Adjust width as needed */
+}
+
+.about-author h2 {
+    margin: 0 0 10px 0;
+}
+
+.about-author p {
+    line-height: 1.5;
+}
+
+/* Overlay and Image Link */
+.product-card {
+    position: relative; /* Establish a positioning context */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.image-link {
+    display: block; /* Make the link fill the area */
+}
+
+.overlay-text {
+    position: absolute; /* Position text over the image */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position */
+    color: white; /* Change text color */
+    font-size: 18px; /* Adjust font size */
+    text-align: center; /* Center text */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px; /* Optional: Padding around text */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
