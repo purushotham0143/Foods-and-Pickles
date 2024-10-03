@@ -224,10 +224,14 @@ body {
             // Validation check for required fields
             if (!billingDetails.firstName || !billingDetails.lastName || !billingDetails.streetAddress ||
                 !billingDetails.city || !billingDetails.state || !billingDetails.zip ||
-                !billingDetails.phone || !billingDetails.email) {
+                !billingDetails.phone || !billingDetails.email || !billingDetails.apartment) {
                 alert('Please fill in all required fields.');
                 return;
             }
+            let arr = {
+                name : billingDetails.firstName + billingDetails.lastName
+            }
+            localStorage.setItem("username",JSON.stringify(arr));
     
             // Additional validation can be added for proper formats (e.g., email and phone)
             let emailPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;

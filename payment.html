@@ -15,6 +15,7 @@
             margin: 0;
         }
         .payment-container {
+            margin-top: 100px;
             display: flex;
             flex-direction: column;
             width: 800px;
@@ -84,24 +85,32 @@
     </style>
 </head>
 <body>
+    
     <div class="payment-container">
+       <span>Make payment before this time   <p id="timer" style="color: red;">10:00</p></span>
         <!-- Left Section -->
         <div class="left-section">
             <div class="price-summary" id="totalAmount">₹0</div>
             <div>Pay to this UPI number:</div>
-            <div class="upi-info"><strong>9100332016</strong></div>
+            <div class="upi-info"><strong>9010033336</strong><p>(KrishnaSekhar Reddy)</p></div>
         </div>
 
         <!-- Right Section -->
         <div class="right-section">
+            <!-- Username Input -->
+            <div class="username-section">
+                <label for="username">Enter your username:</label>
+                <input type="text" id="username" placeholder="Enter username" required />
+            </div>
+
             <!-- Payment Options -->
             <div class="payment-options">
-                <p>Please make the payment to the UPI number above and upload the payment screenshot.</p>
+                <p>Please make the payment to the UPI number above and upload the payment screenshot before the time.</p>
             </div>
 
             <!-- Image Upload Section -->
             <div class="upload-section">
-                <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/upload-screenshot">
+                <form id="uploadForm" enctype="multipart/form-data">
                 <label class="upload-label" for="paymentScreenshot">Upload Payment Screenshot:</label>
                 <input type="file" id="paymentScreenshot" accept="image/*" />
                 <button class="upload-btn" id="uploadBtn" type="submit">Upload</button>
@@ -118,6 +127,24 @@
         // Retrieve the total checkout price from localStorage or set it as 0 if not found
         const totalCheckoutAmount = localStorage.getItem('totalAmount') || 0;
         document.getElementById("totalAmount").innerText = `₹${totalCheckoutAmount}`;
+
+        // Countdown timer logic
+        let timer = document.getElementById('timer');
+        let timeLeft = 600; // 10 minutes in seconds
+
+        const countdown = setInterval(function() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            timer.innerHTML = `${minutes}:${seconds}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                window.location.href = "checkout.html"; // Redirect to checkout page
+            } else {
+                timeLeft--;
+            }
+        }, 1000);
 
         // Image upload and preview functionality
         const paymentScreenshotInput = document.getElementById('paymentScreenshot');
@@ -137,14 +164,21 @@
         });
 
         // Handle image upload button click
-        document.getElementById('uploadBtn').addEventListener('click', function() {
+        document.getElementById('uploadBtn').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent form's default submission behavior
             const paymentScreenshotInput = document.getElementById('paymentScreenshot');
+            const username = document.getElementById('username').value.trim();
             const file = paymentScreenshotInput.files[0];
-            
+
+            if (!username) {
+                alert('Please enter a username.');
+                return;
+            }
+
             if (file) {
                 const formData = new FormData();
                 formData.append('paymentScreenshot', file);
-    
+
                 fetch('http://localhost:3000/upload-screenshot', {
                     method: 'POST',
                     body: formData
@@ -154,6 +188,18 @@
                     if (data.success) {
                         document.getElementById('successMessage').textContent = 'Payment screenshot uploaded successfully!';
                         document.getElementById('successMessage').style.color = 'green';
+
+                        // Send username, amount, and filename via POST
+                        let reqobj = {
+                            username: JSON.parse(localStorage.getItem("username")) || username,
+                            amount: localStorage.getItem('totalAmount') || 0,
+                            fileName: file.name
+                        };
+                        fetch('/getTotalAmount', {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(reqobj)
+                        });
                     } else {
                         document.getElementById('successMessage').textContent = 'Error uploading screenshot.';
                         document.getElementById('successMessage').style.color = 'red';
