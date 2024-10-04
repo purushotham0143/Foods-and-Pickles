@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Status</title>
+    <title>Thank You</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,91 +14,90 @@
             height: 100vh;
             margin: 0;
         }
-        
-        .status-container {
+
+        .thankyou-container {
             text-align: center;
             background-color: white;
             border-radius: 10px;
-            padding: 20px;
+            padding: 40px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 600px;
         }
-        
-        .status-row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+
+        h1 {
+            color: #2f54eb;
+            font-size: 32px;
+            margin-bottom: 20px;
         }
-        
-        .status-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #999;
-            position: relative;
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
         }
-        
-        .status-item p {
-            margin-top: 5px;
+
+        .contact {
             font-size: 16px;
+            color: #777;
+            margin-bottom: 40px;
         }
-        
-        .status-icon {
+
+        .contact a {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 18px;
+            color: #25D366; /* WhatsApp color */
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .contact a:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .contact a span {
+            margin-left: 10px;
+        }
+
+        .whatsapp-icon {
             font-size: 24px;
-            color: #999;
-            opacity: 0.5; /* Initially hidden */
         }
-        
-        .status-item.active {
-            color: #2f54eb; /* Active color */
+
+        a.explore {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background-color: #2f54eb;
+            padding: 12px 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(47, 84, 235, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        
-        .status-item.active .status-icon {
-            opacity: 1; /* Show checkmark */
+
+        a.explore:hover {
+            background-color: #1d3ab9;
+            transform: translateY(-2px);
         }
-        
     </style>
 </head>
 <body>
-    <div class="status-container">
-        <h1>Order Status</h1>
-        <div class="status-row">
-            <div class="status-item confirmed">
-                <span class="status-icon">&#10003;</span>
-                <p>Order Confirmed</p>
-            </div>
-            <div class="status-item shipped">
-                <span class="status-icon">&#10003;</span>
-                <p>Order Shipped</p>
-            </div>
-            <div class="status-item delivered">
-                <span class="status-icon">&#10003;</span>
-                <p>Order Delivered</p>
-            </div>
-        </div>
+    <div class="thankyou-container">
+        <h1>Thank You!</h1>
+        <p>Thanks for shopping on our website.</p>
+        <p class="contact">
+            Please contact us if you have any doubts 
+            <a href="https://wa.me/919100332016?text=Thanks%20for%20Contacting%20Krishika%20Veg%20and%20Non-veg%20pickles.%20We%20are%20Here%20to%20Clarify%20Your%20Doubts" target="_blank">
+                <span class="whatsapp-icon">&#128241;</span>
+                <span>Contact Us on WhatsApp</span>
+            </a>
+        </p>
+        <a href="home.html" class="explore">Explore More Products</a>
     </div>
-
-    <script>
-        // Mock data: set order status to simulate progression
-        const orderStatus = {
-            confirmed: true,
-            shipped: false,
-            delivered: false
-        };
-
-        // Update status items based on orderStatus
-        const statusItems = document.querySelectorAll('.status-item');
-        
-        if (orderStatus.confirmed) {
-            statusItems[0].classList.add('active');
-        }
-        if (orderStatus.shipped) {
-            statusItems[1].classList.add('active');
-        }
-        if (orderStatus.delivered) {
-            statusItems[2].classList.add('active');
-        }
-    </script>
 </body>
 </html>
