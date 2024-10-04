@@ -180,7 +180,6 @@ app.post('/getTotalAmount', (req, res) => {
     res.status(200).send({ success: true });
 });
 
-
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
