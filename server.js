@@ -113,6 +113,9 @@ app.use('/uploads', express.static('uploads')); // Serve uploaded images from th
 
 // Endpoint to submit a review
 
+app.get('/home.html',(req,res) => {
+    res.sendFile("Home.html",{root:'./'})
+})
 
 app.get('/',(req,res) => {
     res.sendFile('Home.html',{root:'./'})
