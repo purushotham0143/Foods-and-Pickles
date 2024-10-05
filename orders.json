@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "firstName": "R",
+    "lastName": "Purushotham",
+    "companyName": "fe",
+    "country": "India",
+    "streetAddress": "Muthukur",
+    "apartment": "gf",
+    "city": "Nellore",
+    "state": "Andhra Pradesh",
+    "zip": "524344",
+    "phone": "7893598563",
+    "email": "RPURUSHOTHAM0143@GMAIL.COM",
+    "orderItems": [
+      {
+        "name": "Chicken Boneless Pickle",
+        "price": 650,
+        "weight": 500,
+        "image": "./Items/checkenBoneless.jpeg",
+        "quantity": 1
+      },
+      {
+        "name": "Chicken Boneless Pickle",
+        "price": 650,
+        "weight": 500,
+        "image": "./Items/checkenBoneless.jpeg",
+        "quantity": 1
+      },
+      {
+        "name": "Natukodi Chicken Pickle",
+        "price": 1600,
+        "weight": 1000,
+        "image": "./Items/natukodi.jpeg",
+        "quantity": 4
+      }
+    ],
+    "orderTotal": "7700.00",
+    "screenshot": false,
+    "date": "9:36:53 pm"
+  }
+]

@@ -82,6 +82,10 @@
             color: green;
             font-weight: bold;
         }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -119,6 +123,7 @@
                     <img id="previewImage" class="image-preview" src="#" alt="Image Preview" />
                 </div>
                 <div class="message" id="successMessage"></div>
+                <div class="error" id="errorMessage"></div>
             </div>
         </div>
     </div>
@@ -150,6 +155,7 @@
         const paymentScreenshotInput = document.getElementById('paymentScreenshot');
         const previewImage = document.getElementById('previewImage');
         const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
 
         paymentScreenshotInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
@@ -169,59 +175,90 @@
             const paymentScreenshotInput = document.getElementById('paymentScreenshot');
             const username = document.getElementById('username').value.trim();
             const file = paymentScreenshotInput.files[0];
-
+        
             if (!username) {
-                alert('Please enter a username.');
+                errorMessage.textContent = 'Please enter a username.';
                 return;
             }
-
+        
+            // Save username to localStorage for future reference
+            localStorage.setItem('username', username);
+        
             if (file) {
                 const formData = new FormData();
                 formData.append('paymentScreenshot', file);
-
-                fetch('http://localhost:3000/upload-screenshot', {
+        
+                fetch('/upload-screenshot', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        let billingDetails = JSON.parse(localStorage.getItem("bill")) || [];
-                        fetch(`/api/orders`,{
-                            method : "POST",
-                            headers : {"Content-Type" : "application/json"},
-                            body : JSON.stringify(billingDetails)
-                        })
-                        document.getElementById('successMessage').textContent = 'Payment screenshot uploaded successfully!';
-                        document.getElementById('successMessage').style.color = 'green';
+                       
+                   
+        
+                        // Assuming 'billKey' is the key used to store your order details
+const billDetails = JSON.parse(localStorage.getItem('bill'));
 
+fetch('/api/orders', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(billDetails),  // Send the entire object
+})
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Order placed successfully:', data);
+    })
+    .catch(error => {
+        console.error('Error placing order:', error);
+    });
+
+                        
+                        // Display success message for image upload
+                        successMessage.textContent = 'Payment screenshot uploaded successfully!';
+                        successMessage.style.color = 'green';
+                        
+                        // Disable further uploads
+                        document.getElementById('uploadBtn').disabled = true;
+        
                         // Send username, amount, and filename via POST
                         let reqobj = {
-                            username: JSON.parse(localStorage.getItem("username")) || username,
-                            amount: localStorage.getItem('totalAmount') || 0,
-                            fileName: file.name
+                            username: localStorage.getItem("username"),
+                            amount: parseFloat(localStorage.getItem('totalAmount')) || 0,
+                            fileName: `/uploads/${file.name}`
                         };
                         fetch('/getTotalAmount', {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(reqobj)
                         });
-                        window.location.href = "status.html"
+        
+                        // Redirect after 1.5 seconds
+                        setTimeout(() => {
+                            window.location.href = "status.html";
+                        }, 1500);
+        
                     } else {
-                        document.getElementById('successMessage').textContent = 'Error uploading screenshot.';
-                        document.getElementById('successMessage').style.color = 'red';
+                        errorMessage.textContent = 'Error uploading screenshot.';
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('successMessage').textContent = 'An error occurred during upload.';
-                    document.getElementById('successMessage').style.color = 'red';
+                    errorMessage.textContent = 'An error occurred during upload.';
                 });
             } else {
-                document.getElementById('successMessage').textContent = 'Please upload an image before clicking Upload.';
-                document.getElementById('successMessage').style.color = 'red';
+                errorMessage.textContent = 'Please upload an image before clicking Upload.';
             }
         });
+        
     </script>
 </body>
 </html>
