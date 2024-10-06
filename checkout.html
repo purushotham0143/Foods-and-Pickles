@@ -410,6 +410,7 @@ body {
                         <!-- Order items will be dynamically populated here -->
                     </tbody>
                 </table>
+                <p class="sub-total" style="color:blue; margin-top: 5px;">SUB TOTAL: </p>
                 <p class="shipping" style="margin-top: 5px; color:green">SHIPPING CHARGE: </p>
                 <p class="total">Total: ₹<span id="order-total">0.00</span></p>
             </div>
@@ -444,9 +445,10 @@ body {
             totalWeight += item.weight * item.quantity;
         });
         let shippingCharge = calculateShippingCharge(totalWeight);
+        document.querySelector('.sub-total').innerHTML = `SUB TOTAL : ${total}`
         total += shippingCharge;
         localStorage.setItem("totalAmount",total);
-        orderTotalElement.textContent = total.toFixed(2);
+        orderTotalElement.textContent = total;
         document.querySelector('.shipping').innerHTML = `SHIPPING CHARGE : ${shippingCharge}`   
     }
 
