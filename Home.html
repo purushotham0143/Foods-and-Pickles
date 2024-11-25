@@ -226,6 +226,16 @@
                     </div>
                 </div>
             </div>
+     <!-- Lazy Loading -->
+      
+     <div>
+        <div id="load"></div>
+        <button id="many">LoadMore</button>
+        <button id="sum">LoadLess</button>
+     </div>
+            
+         
+
             <!-- Veg  -->
             <div class="col">
                 <div class="product-card">
@@ -235,6 +245,7 @@
                     </a>
                 </div>
             </div>
+            
             <!-- Non-veg  -->
             <div class="col">
                 <div class="product-card">
@@ -325,6 +336,77 @@
                     card.style.display = "none";
                 }
             });
+        });
+        
+        document.getElementById('many').addEventListener('click', () => {
+            let currindex = 0;
+            const noitems = 7;
+            let products = [];
+        
+            // Fetch product data
+            async function datafetch() {
+                try {
+                    let response = await fetch('products.json');
+                    products = await response.json();
+                    console.log(products);
+                    loadmore(); // Load initial set of products
+                } catch (error) {
+                    console.error("Error fetching product data:", error);
+                }
+            }
+        
+            // Function to load more products
+            function loadmore() {
+                let arr = products.slice(currindex, currindex + noitems);
+                arr.forEach((ele) => {
+                    let newdiv = document.createElement('div');
+                    newdiv.innerHTML = `
+                     <div class="col">
+                        <div class="product-card">
+                            <img src="${ele.image}" alt="No image" height="100px" width="100px">
+                            <div class="product-info">
+                                <p>Name: ${ele.name}</p>
+                                <div class="product-price">Price Range: ${ele.priceRange}</div>
+                                <a href="${ele.buyLink}" class="btn-buy" target="_blank">Buy Now</a>
+                                <a href="${ele.reviewLink}" class="btn-rev" target="_blank">Review</a>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    document.getElementById('load').appendChild(newdiv);
+                });
+        
+                currindex += noitems; // Update index after loading
+        
+                // Disable "Load More" button if all products are loaded
+                if (currindex >= products.length) {
+                    document.getElementById('many').disabled = true;
+                }
+            }
+        
+            // Functionality for "Show Less" button
+            document.getElementById('sum').addEventListener('click', () => {
+                if (currindex >noitems) {
+                    currindex -= noitems; // Move index back
+                } else {
+                    currindex = 0; // Reset to the beginning
+                }
+        
+                // Clear and reload products
+                document.getElementById('load').innerHTML = ''; 
+            });
+        
+            // Load more products on button click
+            document.getElementById('many').addEventListener('click', () => {
+                if (currindex < products.length) {
+                    loadmore();
+                } else {
+                    alert("No more products to display");
+                }
+            });
+        
+            // Initial data fetch
+            datafetch();
         });
         
     </script>

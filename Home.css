@@ -8,7 +8,24 @@ body {
     box-sizing: border-box;
 }
 
+/* Lazy loading  */
+#many{
+background-color: red;
+width: 100px;
+height: 50px;
+border-radius: 10px;
 
+}
+#sum{
+    background-color: rgb(0, 255, 30);
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    }
+
+  
+      
+    
 /* Prevent layout shifts by fixing the content size and position */
 * {
     margin: 0;
@@ -50,6 +67,7 @@ body {
     animation: ticker-move 15s linear infinite;
     will-change: transform;
 }
+
 
 @keyframes ticker-move {
     0% {
@@ -185,7 +203,6 @@ footer a:hover {
     padding: 10px; /* Optional: Padding around the text */
     border-radius: 5px; /* Optional: Rounded corners */
 }
-
 
 
 
@@ -334,4 +351,3 @@ footer a:hover {
         padding: 5px;
     }
 }
-

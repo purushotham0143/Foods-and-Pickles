@@ -1,0 +1,101 @@
+[
+    {
+      "name": "Chicken Pickle (with bone)",
+      "image": "./Items/checkenbone.jpeg",
+      "priceRange": "₹300 - ₹1000",
+      "buyLink": "./chicken.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Chicken Boneless Pickle",
+      "image": "./Items/checkenBoneless.jpeg",
+      "priceRange": "₹350 - ₹1300",
+      "buyLink": "./checkenBoneless.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Gongura Chicken Pickle (Boneless)",
+      "image": "./Items/gongurachecken.jpeg",
+      "priceRange": "₹400 - ₹1400",
+      "buyLink": "./GonguracheckenBoneless.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Mutton Pickle (Boneless)",
+      "image": "./Items/mutton.jpeg",
+      "priceRange": "₹700 - ₹2600",
+      "buyLink": "./muttonboneless.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Gongura Mutton Pickle",
+      "image": "./Items/gonguramutton.jpeg",
+      "priceRange": "₹750 - ₹2800",
+      "buyLink": "./GonguraMutton.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Prawn Pickle",
+      "image": "./Items/prawn.jpeg",
+      "priceRange": "₹400 - ₹1600",
+      "buyLink": "./prawn.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Gongura Prawn Pickle",
+      "image": "./Items/gonguraprawns.jpeg",
+      "priceRange": "₹450 - ₹1800",
+      "buyLink": "./Gonguraprawn.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Natu Kodi Pickle",
+      "image": "./Items/natukodi.jpeg",
+      "priceRange": "₹460 - ₹1600",
+      "buyLink": "./Natukodi.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Sweet Gaavalu",
+      "image": "./Items/sweetgavalu.jpeg",
+      "priceRange": "₹170 - ₹330",
+      "buyLink": "./sweetGaavalu.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Chakkalu",
+      "image": "./Items/chakkalu.jpeg",
+      "priceRange": "₹170 - ₹330",
+      "buyLink": "./chakkalu.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Ravaladdu",
+      "image": "./Items/ravaladdu.jpeg",
+      "priceRange": "₹170 - ₹330",
+      "buyLink": "./ravaladdu.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Sunnuvunda",
+      "image": "./Items/sunnuvunda.jpeg",
+      "priceRange": "₹170 - ₹330",
+      "buyLink": "./sunnuvunda.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Mushroom Pickle",
+      "image": "./Items/mushroom.jpeg",
+      "priceRange": "₹170 - ₹330",
+      "buyLink": "./mushroom.html",
+      "reviewLink": "./Review.html"
+    },
+    {
+      "name": "Halva",
+      "image": "./Items/halva.jpeg",
+      "priceRange": "₹170 - ₹330",
+      "buyLink": "./halva.html",
+      "reviewLink": "./Review.html"
+    }
+  ]
+  
