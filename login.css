@@ -1,0 +1,108 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+/* Container styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Form title and subtitle */
+.form-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.676);
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #fff;
+}
+
+/* Button styling */
+button {
+    background-color: #2575fc;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #6a11cb;
+}
+
+/* Signup text styling */
+.signup-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.signup-text a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.signup-text a:hover {
+    color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    .form-title {
+        font-size: 1.5rem;
+    }
+    button {
+        font-size: 0.9rem;
+    }
+}

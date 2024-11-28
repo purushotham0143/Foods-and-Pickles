@@ -6,14 +6,26 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
-
+const session=require('express-session')
 const app = express();
 const PORT = 3000; // Change this to any port you prefer
+
+
+
+app.use(session({
+    saveUninitialized :false,
+    resave : false,
+    secret : "abc",
+    cookie : {maxAge : 60000, secure:false}
+}))
 // MongoDB connection
 mongoose.connect('mongodb+srv://rpurushotham0143:1234@cluster0.ivuxpys.mongodb.net/krishikapickles?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
+
+
+
 
   
   const db = mongoose.connection;
@@ -22,6 +34,16 @@ mongoose.connect('mongodb+srv://rpurushotham0143:1234@cluster0.ivuxpys.mongodb.n
     console.log('Connected to MongoDB');
   });
   
+
+//User Login Schema
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    number: { type: Number, required: true },
+});
+const User = mongoose.model('User',userSchema);
+
+
   // Define the contact schema
   const contactSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -120,6 +142,64 @@ app.get('/home.html',(req,res) => {
 app.get('/',(req,res) => {
     res.sendFile('Home.html',{root:'./'})
 })
+
+//Login Code 
+app.post('/login',async (req,res) => {
+    const {name,email,number} = req.body;
+    try{
+        const user = await User.findOne({name,email,number});
+        if(user){
+            req.session.user = user;
+            res.json({redirected : true});
+        }
+        else{
+            res.json({redirected:false,message : "Invalid Credentials"})
+        }
+    }
+    catch(error){
+        console.error("Error during login:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+})
+
+app.get('/userLogin', (req, res) => {
+    console.log('Session:', req.session);
+    if (req.session && req.session.user) {
+        res.json({ loginSuccess: true, username: req.session.user.name });
+    } else {
+        res.json({ loginSuccess: false });
+    }
+});
+
+
+
+app.post('/signup', async (req, res) => {
+    const { name, email, number } = req.body;
+    console.log("Signup Request Data:", req.body); // Log request data for debugging
+
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(409).json({ message: "User already exists" });
+        }
+
+        const newUser = new User({ name, email, number });
+        await newUser.save();
+        console.log("User saved successfully:", newUser);
+        res.status(201).json({ message: "User registered successfully" });
+    } catch (error) {
+        console.error("Error during signup:", error.message); // Log detailed error
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+app.get('/logout',(req,res) => {
+    if(req.session && req.session.user){
+        req.session.destroy();
+        res.redirect('/');
+    }
+})
+
 
 app.post('/submit-review', upload.single('reviewImage'), (req, res) => {
     const reviewData = req.body;

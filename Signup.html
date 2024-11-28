@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="./login.css">
+</head>
+<body>
+    <div class="container">
+        <form id="container-form" method="post">
+            <h1 class="form-title">Sign Up</h1>
+            <p class="form-subtitle">Create a new account to join us!</p>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <input type="number" id="number" name="number" placeholder="Enter your number" required>
+            <button type="submit" id="btn">SIGN UP</button><br><br>
+            <p class="login-text">Already have an account? <a href="./login.html">Login here</a>.</p>
+        </form>
+    </div>
+    <p id="signup-message"></p>
+    <script>
+        let signupForm = document.querySelector("#container-form");
+        let signupMessage = document.querySelector('#signup-message');
+
+        signupForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            let name = document.querySelector('#name').value;
+            let email = document.querySelector('#email').value;
+            let number = document.querySelector('#number').value;
+            let obj = { name, email, number };
+
+            let emailPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+            let phonePattern = /^[0-9]{10}$/;
+
+            if (!emailPattern.test(obj.email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            if (!phonePattern.test(obj.number)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            fetch('/signup', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(obj)
+            })
+            .then(res => res.json())
+            .then(data => {
+                signupMessage.innerHTML = data.message; // Assuming 'data' has a 'message' property
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                signupMessage.innerHTML = "An error occurred during signup.";
+            });
+        });
+    </script>
+</body>
+</html>

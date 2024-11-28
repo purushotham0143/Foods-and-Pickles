@@ -455,7 +455,7 @@ body {
 
     
 function calculateShippingCharge(weight) {
-    if (weight <= 250) {
+    if (weight <= 250 && weight!=0) {
         return 50;
     } else {
         // You can add more conditions for different weight ranges
@@ -466,6 +466,9 @@ function calculateShippingCharge(weight) {
 
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('place-order-btn').addEventListener('click', function() {
+
+            const isLoggedIn = localStorage.getItem("isLoggedIn");
+            
             // Collecting billing details
             let billingDetails = {
                 firstName: document.getElementById('first-name').value.trim(),
@@ -513,6 +516,11 @@ function calculateShippingCharge(weight) {
             // Proceed with placing the order if validation passes
             
             localStorage.setItem("bill",JSON.stringify(billingDetails))
+         
+            if(isLoggedIn == null){
+                window.location.href = "/login.html";
+                return;
+            }
             window.location.href = "payment.html";
         });
     });
