@@ -102,7 +102,7 @@
     </div>
     
     <div class="container text-center my-5">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="load">
             <div class="col">
                 <div class="product-card">
                     <img src="./Items/checkenbone.jpeg" alt="Chicken Pickle">
@@ -259,44 +259,49 @@
             </div>
      <!-- Lazy Loading -->
       
-     <div>
-        <div id="load"></div>
-        <button id="many">LoadMore</button>
-        <button id="sum">LoadLess</button>
-     </div>
+    
             
          
 
-            <!-- Veg  -->
-            <div class="col">
-                <div class="product-card">
-                    <a href="./Veg-pickles.html" class="image-link">
-                        <img style="height: 300px" src="./vegpicklesss.jpg" alt="Halva">
-                        <p class="overlay-text">Click Image To get Veg-pickles</p>
-                    </a>
-                </div>
-            </div>
             
-            <!-- Non-veg  -->
-            <div class="col">
-                <div class="product-card">
-                    <a href="./Non-vegPickles.html" class="image-link">
-                        <img style="height: 300px" src="./Nonvegpickles.jpg" alt="Halva">
-                        <p class="overlay-text">Click Image To get NonVeg-pickles</p>
-                    </a>
-                </div>
-            </div>
-             <!-- sweets  -->
-             <div class="col">
-                <div class="product-card">
-                    <a href="./sweets.html" class="image-link">
-                        <img style="height: 300px" src="./sweetssss.avif" alt="Halva">
-                        <p class="overlay-text">Click Image To get Sweets</p>
-                    </a>
-                </div>
-            </div>
                <!-- Up to here  -->
-        </div>         
+        </div>
+        <div>
+        
+            <button id="many">LoadMore</button>
+            <button id="sum">LoadLess</button>
+         </div>
+        <div class="load row row-cols-1 row-cols-md-3 g-4">
+            
+        <!-- Veg  -->
+        <div class="col">
+            <div class="product-card">
+                <a href="./Veg-pickles.html" class="image-link">
+                    <img style="height: 300px" src="./vegpicklesss.jpg" alt="Halva">
+                    <p class="overlay-text">Click Image To get Veg-pickles</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Non-veg  -->
+        <div class="col">
+            <div class="product-card">
+                <a href="./Non-vegPickles.html" class="image-link">
+                    <img style="height: 300px" src="./Nonvegpickles.jpg" alt="Halva">
+                    <p class="overlay-text">Click Image To get NonVeg-pickles</p>
+                </a>
+            </div>
+        </div>
+         <!-- sweets  -->
+         <div class="col">
+            <div class="product-card">
+                <a href="./sweets.html" class="image-link">
+                    <img style="height: 300px" src="./sweetssss.avif" alt="Halva">
+                    <p class="overlay-text">Click Image To get Sweets</p>
+                </a>
+            </div>
+        </div>   
+    </div>      
     </div>
     <!-- founder -->
     <div class="founder">
@@ -425,6 +430,7 @@
         
                 // Clear and reload products
                 document.getElementById('load').innerHTML = ''; 
+                datafetch();
             });
         
             // Load more products on button click

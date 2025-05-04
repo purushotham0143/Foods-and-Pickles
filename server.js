@@ -19,7 +19,7 @@ app.use(session({
     cookie : {maxAge : 60000, secure:false}
 }))
 // MongoDB connection
-mongoose.connect('mongodb+srv://rpurushotham0143:1234@cluster0.ivuxpys.mongodb.net/krishikapickles?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://rpurushotham0143:puru123@cluster0.ivuxpys.mongodb.net/krishikapickles?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

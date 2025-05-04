@@ -48,7 +48,7 @@
             fetch('/login',{
                 method : "POST",
                 headers : {'Content-Type' : 'application/json'},
-                body : JSON.stringify(obj)
+                body : JSON.stringify(obj) 
             }).then(res => res.json())
             .then(data => {
                 let cart = localStorage.getItem("cart");

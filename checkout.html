@@ -517,10 +517,7 @@ function calculateShippingCharge(weight) {
             
             localStorage.setItem("bill",JSON.stringify(billingDetails))
          
-            if(isLoggedIn == null){
-                window.location.href = "/login.html";
-                return;
-            }
+           
             window.location.href = "payment.html";
         });
     });
